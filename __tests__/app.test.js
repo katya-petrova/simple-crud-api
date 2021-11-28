@@ -1,7 +1,7 @@
 const server = require("../app");
 const supertest = require("supertest");
 
-describe("Testing simple-crud-api", () => {
+describe("Testing simple-crud-api #1", () => {
   const req = supertest(server);
   let id;
   const mockUser = { name: "Alex", age: 24, hobbies: "coding" };
@@ -37,10 +37,39 @@ describe("Testing simple-crud-api", () => {
     expect(response.status).toBe(204);
   });
 
-  test("GET request with invalid id should return status code 200", async () => {
+  test("GET request with invalid id should return status code 404", async () => {
     const response = await req.get(`/person/${id}`);
     expect(response.status).toBe(404);
   });
 
   server.close();
 });
+
+
+describe('Testing simple-crud-api #2', () => {
+  const req = supertest(server)
+  const mockUser = { name: 'Pete', age: 2 }
+  const nonExistId = '995dd2d8-b918-4eb3-a744-b6374be62089'
+
+  test('GET request with invalid id should return status code 400', async () => {
+    const badId = '!!!efghj'
+    const response = await req.get(`/person/${badId}`)
+    expect(response.status).toBe(400)
+  })
+
+  test('GET request with not existing id should return status code 400', async () => {
+    const response = await req.get(`/person/${nonExistId}`)
+    expect(response.status).toBe(404)
+  })
+})
+
+describe('Testing simple-crud-api #3', () => {
+  const req = supertest(server)
+  const mockUser = { name: 'Garry', age: 65 }
+
+  test('POST request with wrong objects fields should return status code 400', async () => {
+    const response = await req.post('/person').send(mockUser)
+    expect(response.status).toBe(400)
+  })
+})
+

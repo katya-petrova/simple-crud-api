@@ -5,8 +5,11 @@
   "main": "app.js",
   "scripts": {
     "start:dev": "nodemon node app.js",
-    "start:prod": "webpack --config=webpack.config.js && webpack serve --open",
+    "start:prod": "webpack && node .",
     "test": "jest"
+  },
+  "directories": {
+    "main": "dist/main.bundle.js"
   },
   "repository": {
     "type": "git",
