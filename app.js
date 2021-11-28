@@ -8,10 +8,8 @@ const { getReqData } = require("./src/utils");
 
 const codes = require('./src/status-codes')
 
-const regexExp =
-        /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
-
-const server = http.createServer(async (req, res) => {
+const server = http
+.createServer(async (req, res) => {
   // /person : GET
   if (req.url === "/person" && req.method === "GET") {
     const persons = await new Controller().getAllPersons();
@@ -88,7 +86,11 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(codes.NotFound, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ message: "Route not found" }));
   }
-});
+}).on('error', function (e) {
+  res.status(500)
+  res.end(JSON.stringify({ message: 'something went wrong :(' }))
+  console.log(e)
+})
 
 const start = async () => {
   try {
