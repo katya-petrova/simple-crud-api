@@ -8,23 +8,19 @@
 
 ## how it works
 
-- **GET** /person or /person/${personId} should return status code 200 and all persons(or an empty array if threre are no persons) 
-- **GET** /person/${personId} 
- should return status code 200 person with corresponding personId
- should return status code 400 with error message if personId is invalid (or not uuid)
- should return status code 404 with error message if if there's no person with corresponding personId
+- **GET** /users or /users/${personId} should return status code 200 and all persons(or an empty array if threre are no persons)
+- **GET** /users/${personId}
+  should return status code 200 users with corresponding personId
+  should return status code 400 with error message if personId is invalid (or not uuid)
+  should return status code 404 with error message if if there's no users with corresponding personId
 
-- **POST** /person should return status code 200 and create a record about new person and store it in database (fields name, age and hobbies are **required**)
- if there're no required fields server should return status code 400 and corresponding message
+- **POST** /users should return status code 200 and create a record about new users and store it in database (fields name, age and hobbies are **required**)
+  if there're no required fields server should return status code 400 and corresponding message
 
-- **PUT** /person/${personId} should update record about existing person and return status code 200
- should return status code 400 with error message if personId is invalid (or not uuid)
- should return status code 404 with error message if if there's no person with corresponding personId
+- **PUT** /users/${personId} should update record about existing users and return status code 200
+  should return status code 400 with error message if personId is invalid (or not uuid)
+  should return status code 404 with error message if if there's no users with corresponding personId
 
-- **DELETE** /person/${personId} should delete record about existing person from database
- should return status code 400 with error message if personId is invalid (or not uuid)
- should return status code 404 with error message if if there's no person with corresponding personId
-
-## run tests
-
-1. npm run test
+- **DELETE** /users/${personId} should delete record about existing users from database
+  should return status code 400 with error message if personId is invalid (or not uuid)
+  should return status code 404 with error message if if there's no users with corresponding personId
